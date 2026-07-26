@@ -1,0 +1,9 @@
+event_id,event_date,machine_id,technician_id,technician_name,technician_role,downtime_hours,defect_flag,maintenance_cost_usd,maintenance_type,description
+EVT-001,2026-07-02,M-102,T-01,Kenji Sato,Senior Electrical Engineer,4.5,1,1250.00,Corrective,Transformer oil temperature spike due to cooling fan relay fault. Replaced cooling fan relay and flushed oil reservoir.
+EVT-002,2026-07-02,M-202,T-02,Yuki Tanaka,Mechanical Specialist,3.0,1,680.00,Corrective,Conveyor motor vibration caused by worn drive belt and misaligned pulley. Replaced belt and realigned drive assembly.
+EVT-003,2026-07-05,M-101,T-01,Kenji Sato,Senior Electrical Engineer,1.5,0,300.00,Preventive,Scheduled inspection, dielectric oil testing, and busbar thermal scan.
+EVT-004,2026-07-10,M-201,T-03,Hiroshi Suzuki,Vibration Analyst,5.0,1,1420.00,Corrective,High bearing vibration alarm triggered. Dismantled motor housing, replaced drive-end roller bearings (Model SKF-6210), and repacked high-temp grease.
+EVT-005,2026-07-10,M-301,T-02,Yuki Tanaka,Mechanical Specialist,2.5,1,450.00,Corrective,Chilled water pump mechanical seal leak and pressure drop. Replaced graphite mechanical seal and refilled coolant circuit.
+EVT-006,2026-07-15,M-102,T-01,Kenji Sato,Senior Electrical Engineer,1.0,0,200.00,Preventive,Post-repair follow-up scan and oil level check. All parameters nominal.
+EVT-007,2026-07-20,M-101,T-01,Kenji Sato,Senior Electrical Engineer,6.0,1,1850.00,Corrective,Winding overheating alarm triggered under heavy load. Replaced secondary tap changer gasket and calibrated thermal protection relay.
+EVT-008,2026-07-20,M-202,T-03,Hiroshi Suzuki,Vibration Analyst,4.0,1,920.00,Corrective,Motor frame resonance and rotor imbalance. Performed dynamic field balancing and tightened foundation anchor bolts.

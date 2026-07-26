@@ -1,0 +1,31 @@
+timestamp,machine_id,machine_name,machine_type,location_plant,location_sector,temperature_c,vibration_mm_s,pressure_bar,runtime_hours,defect_flag
+2026-07-01 08:00:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,65.4,1.2,4.5,4120,0
+2026-07-01 08:00:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,88.9,3.8,4.1,6200,1
+2026-07-01 08:00:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,55.0,2.1,3.0,2300,0
+2026-07-01 08:00:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,72.3,4.5,2.8,4850,1
+2026-07-01 08:00:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,42.1,0.9,5.2,1900,0
+2026-07-02 09:15:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,66.1,1.3,4.6,4144,0
+2026-07-02 09:15:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,94.2,5.1,3.8,6224,1
+2026-07-02 09:15:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,56.2,2.0,3.0,2324,0
+2026-07-02 09:15:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,76.8,4.9,2.7,4874,1
+2026-07-02 09:15:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,43.0,1.0,5.1,1924,0
+2026-07-05 14:30:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,67.0,1.1,4.4,4200,0
+2026-07-05 14:30:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,70.1,1.5,4.3,6250,0
+2026-07-05 14:30:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,54.8,1.9,3.1,2400,0
+2026-07-05 14:30:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,58.0,2.3,3.0,4900,0
+2026-07-05 14:30:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,41.5,0.8,5.3,1950,0
+2026-07-10 11:00:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,64.8,1.2,4.5,4320,0
+2026-07-10 11:00:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,71.5,1.6,4.4,6370,0
+2026-07-10 11:00:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,82.4,5.8,2.5,2520,1
+2026-07-10 11:00:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,59.1,2.2,3.1,5020,0
+2026-07-10 11:00:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,51.2,3.2,3.9,2070,1
+2026-07-15 16:45:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,65.2,1.3,4.5,4440,0
+2026-07-15 16:45:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,72.0,1.7,4.3,6490,0
+2026-07-15 16:45:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,56.0,2.1,3.0,2640,0
+2026-07-15 16:45:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,60.5,2.4,3.0,5140,0
+2026-07-15 16:45:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,42.8,0.9,5.2,2190,0
+2026-07-20 10:20:00,M-101,Main Power Transformer 1,Transformer,Plant Alpha,Sector A,86.5,4.1,3.9,4560,1
+2026-07-20 10:20:00,M-102,Auxiliary Power Transformer 2,Transformer,Plant Alpha,Sector A,73.1,1.8,4.2,6610,0
+2026-07-20 10:20:00,M-201,High-Torque Drive Motor 1,Motor,Plant Alpha,Sector B,57.1,2.2,3.0,2760,0
+2026-07-20 10:20:00,M-202,Conveyor Drive Motor 2,Motor,Plant Beta,Sector C,79.4,4.7,2.6,5260,1
+2026-07-20 10:20:00,M-301,Primary Chilled Water Pump,Cooling System,Plant Beta,Sector D,43.1,1.1,5.1,2310,0

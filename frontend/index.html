@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Factory Equipment Maintenance & Data Platform</title>
+    <meta name="description" content="End-to-End AI-Assisted Smart Factory Equipment Maintenance, Star Schema Data Warehouse, BI Analytics Dashboard & RAG Assistant for Meiden Engineering & Meidensha Corporation DX.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i data-lucide="factory"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>Meiden DX</h2>
+                    <span>Smart Factory Platform</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>BI Dashboard</span>
+                </button>
+                <button class="nav-btn" data-tab="ai-assistant">
+                    <i data-lucide="bot"></i>
+                    <span>AI RAG Assistant</span>
+                    <span class="badge">AI</span>
+                </button>
+                <button class="nav-btn" data-tab="equipment">
+                    <i data-lucide="cpu"></i>
+                    <span>Equipment Status</span>
+                </button>
+                <button class="nav-btn" data-tab="data-warehouse">
+                    <i data-lucide="database"></i>
+                    <span>Star Schema DB</span>
+                </button>
+                <button class="nav-btn" data-tab="er-diagram">
+                    <i data-lucide="git-fork"></i>
+                    <span>ER Diagram</span>
+                </button>
+            </nav>
+
+            <div class="etl-control-box">
+                <div class="etl-info">
+                    <i data-lucide="refresh-cw" id="etl-spinner"></i>
+                    <div>
+                        <strong>Module 1 & 2 ETL</strong>
+                        <span>Python SQLite Engine</span>
+                    </div>
+                </div>
+                <button id="btn-run-etl" class="btn-etl">
+                    <i data-lucide="play"></i> Run ETL Pipeline
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Smart Factory Equipment Analytics & BI Dashboard</h1>
+                    <p class="subtitle">Real-time telemetry, predictive maintenance windows, and RAG operations query assistant</p>
+                </div>
+                <div class="header-status">
+                    <div class="status-indicator">
+                        <span class="pulse"></span>
+                        <span>Factory Telemetry: <strong>Active</strong></span>
+                    </div>
+                    <div class="user-profile">
+                        <i data-lucide="user-check"></i>
+                        <span>DX Engineer</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB 1: BI DASHBOARD -->
+            <section id="tab-dashboard" class="tab-pane active">
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon blue"><i data-lucide="clock"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Total Downtime</span>
+                            <h3 id="kpi-downtime">-- hrs</h3>
+                            <span class="kpi-sub">Across all factory sectors</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon green"><i data-lucide="dollar-sign"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Maintenance Spend</span>
+                            <h3 id="kpi-cost">$--</h3>
+                            <span class="kpi-sub">Total repair & parts cost</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon amber"><i data-lucide="alert-triangle"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">Unplanned Defects</span>
+                            <h3 id="kpi-defects">--</h3>
+                            <span class="kpi-sub">Breakdown incidents</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon purple"><i data-lucide="wrench"></i></div>
+                        <div class="kpi-data">
+                            <span class="kpi-label">MTTR (Mean Time to Repair)</span>
+                            <h3 id="kpi-mttr">-- hrs</h3>
+                            <span class="kpi-sub">Average repair duration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3><i data-lucide="trending-up"></i> Equipment Downtime Trends by Machine</h3>
+                            <span class="chart-badge">Module 3 - BI Analytics</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart-downtime"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3><i data-lucide="bar-chart-2"></i> Sensor Defect Sample & Temp Distribution</h3>
+                            <span class="chart-badge">Telemetry Analysis</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart-defect"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: AI RAG ASSISTANT -->
+            <section id="tab-ai-assistant" class="tab-pane">
+                <div class="rag-container">
+                    <div class="rag-header-box">
+                        <div class="rag-badge"><i data-lucide="sparkles"></i> Module 4 — RAG Maintenance Assistant</div>
+                        <h2>Ask Natural Language Questions</h2>
+                        <p>Queries maintenance logs from SQLite Data Warehouse and Meiden Technical Equipment Manuals.</p>
+                        <div class="sample-queries">
+                            <span>Try clicking:</span>
+                            <button class="sample-chip" onclick="sendSampleQuery('When was Machine 102 last serviced?')">"When was Machine 102 last serviced?"</button>
+                            <button class="sample-chip" onclick="sendSampleQuery('What is the procedure for high bearing vibration in motor M-201?')">"What is the procedure for high bearing vibration?"</button>
+                            <button class="sample-chip" onclick="sendSampleQuery('What is the procedure for transformer temperature spike?')">"Transformer temperature spike procedure?"</button>
+                        </div>
+                    </div>
+
+                    <div class="chat-window" id="chat-messages">
+                        <div class="message system-message">
+                            <div class="msg-avatar"><i data-lucide="bot"></i></div>
+                            <div class="msg-body">
+                                <strong>Meiden AI Operations Assistant</strong>
+                                <p>Hello! I am your AI Maintenance Assistant. I can search equipment service history, technician repair records, and technical manuals for Meiden transformers, motors, and cooling systems. How can I help you today?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Ask a question (e.g. When was Machine 101 serviced? Or how to replace pump seal?)..." autocomplete="off">
+                        <button id="btn-send-chat" class="btn-send">
+                            <i data-lucide="send"></i> Ask AI
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: EQUIPMENT STATUS -->
+            <section id="tab-equipment" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3><i data-lucide="activity"></i> Machine Health & Predictive Maintenance Windows</h3>
+                        <p>Real-time sensor telemetry and predicted service windows</p>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Machine ID</th>
+                                    <th>Equipment Name</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Temp (°C)</th>
+                                    <th>Vibration (mm/s)</th>
+                                    <th>Pressure (bar)</th>
+                                    <th>Health Status</th>
+                                    <th>Maintenance Window</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-equipment-body">
+                                <tr><td colspan="9" class="loading-td">Loading equipment data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: DATA WAREHOUSE & STAR SCHEMA -->
+            <section id="tab-data-warehouse" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3><i data-lucide="database"></i> Relational Database Star Schema Viewer (SQLite)</h3>
+                        <p>Module 2 Data Warehouse modeling — Fact and Dimension Tables</p>
+                    </div>
+                    <div class="schema-tabs" id="schema-table-buttons">
+                        <!-- Table selector buttons injected by JS -->
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="table-star-schema">
+                            <thead id="schema-thead"></thead>
+                            <tbody id="schema-tbody">
+                                <tr><td class="loading-td">Select a table above to view data</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: ER DIAGRAM DOCUMENTATION -->
+            <section id="tab-er-diagram" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3><i data-lucide="git-fork"></i> Star Schema Entity-Relationship (ER) Diagram</h3>
+                        <p>Data Infrastructure & BI Model Documentation for Meiden Engineering Applications</p>
+                    </div>
+                    
+                    <div class="er-visual-box">
+                        <div class="er-node fact-node">
+                            <h4>FACT: fact_maintenance_events</h4>
+                            <ul>
+                                <li><code>event_id</code> (PK)</li>
+                                <li><code>date_id</code> (FK)</li>
+                                <li><code>equipment_id</code> (FK)</li>
+                                <li><code>technician_id</code> (FK)</li>
+                                <li><code>location_id</code> (FK)</li>
+                                <li><code>downtime_hours</code></li>
+                                <li><code>defect_flag</code></li>
+                                <li><code>maintenance_cost_usd</code></li>
+                                <li><code>description</code></li>
+                            </ul>
+                        </div>
+                        <div class="er-node dim-node">
+                            <h4>DIM: dim_equipment</h4>
+                            <ul>
+                                <li><code>equipment_id</code> (PK)</li>
+                                <li><code>name</code></li>
+                                <li><code>type</code></li>
+                                <li><code>location_plant</code></li>
+                            </ul>
+                        </div>
+                        <div class="er-node dim-node">
+                            <h4>DIM: dim_location</h4>
+                            <ul>
+                                <li><code>location_id</code> (PK)</li>
+                                <li><code>plant</code></li>
+                                <li><code>sector</code></li>
+                            </ul>
+                        </div>
+                        <div class="er-node dim-node">
+                            <h4>DIM: dim_technician</h4>
+                            <ul>
+                                <li><code>technician_id</code> (PK)</li>
+                                <li><code>name</code></li>
+                                <li><code>role</code></li>
+                            </ul>
+                        </div>
+                        <div class="er-node dim-node">
+                            <h4>DIM: dim_date</h4>
+                            <ul>
+                                <li><code>date_id</code> (PK)</li>
+                                <li><code>date_str</code></li>
+                                <li><code>year</code>, <code>month</code>, <code>day</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

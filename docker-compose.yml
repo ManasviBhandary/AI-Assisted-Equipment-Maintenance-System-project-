@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  smart-factory-platform:
+    build: .
+    container_name: smart_factory_app
+    ports:
+      - "8000:8000"
+    restart: always
+    environment:
+      - PORT=8000
