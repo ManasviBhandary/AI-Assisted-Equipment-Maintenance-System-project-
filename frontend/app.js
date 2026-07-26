@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         msgDiv.innerHTML = `
             <div class="msg-avatar"><i data-lucide="${avatarIcon}"></i></div>
             <div class="msg-body">
-                <strong>${sender === 'user' ? 'You' : 'Meiden AI Operations Assistant'}</strong>
+                <strong>${sender === 'user' ? 'You' : 'Smart Factory AI Assistant'}</strong>
                 <div>${formattedText}</div>
                 ${sourcesHtml}
             </div>
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         msgDiv.innerHTML = `
             <div class="msg-avatar"><i data-lucide="bot"></i></div>
             <div class="msg-body">
-                <strong>Meiden AI Assistant</strong>
+                <strong>Smart Factory AI Assistant</strong>
                 <p style="color:var(--text-muted); font-style:italic;">Searching SQLite Star Schema & Equipment Manuals...</p>
             </div>
         `;

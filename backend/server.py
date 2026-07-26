@@ -40,7 +40,7 @@ class SmartFactoryRequestHandler(SimpleHTTPRequestHandler):
         api_key_header = self.headers.get('X-API-Key', '')
         api_key_param = params.get('api_key', [''])[0]
         
-        valid_keys = {'meiden-dx-secret-key', 'meiden-demo-2026', 'default-key'}
+        valid_keys = {'factory-dx-secret-key', 'factory-demo-2026', 'default-key'}
         
         # Allow open access if key matches or for static files / frontend browser requests with default header
         if api_key_header in valid_keys or api_key_param in valid_keys:
@@ -268,7 +268,7 @@ class SmartFactoryRequestHandler(SimpleHTTPRequestHandler):
         report = {
             "title": "Smart Factory Equipment Maintenance Audit Report",
             "generated_at": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "organization": "Meidensha & Meiden Engineering DX Promotion",
+            "organization": "Smart Factory DX Operations",
             "total_maintenance_events": len(events),
             "events": events
         }

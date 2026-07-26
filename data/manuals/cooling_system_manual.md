@@ -1,4 +1,4 @@
-# Meiden Industrial Cooling Water Pump Technical Manual
+# Industrial Cooling Water Pump Technical Manual
 Document Code: MEC-MAN-CSP-003
 Target Equipment: M-301 (Primary Chilled Water Pump)
 

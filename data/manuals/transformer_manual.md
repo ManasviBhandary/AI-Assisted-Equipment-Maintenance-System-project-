@@ -1,9 +1,9 @@
-# Meiden Industrial Power Transformer Technical Manual & Service Standard
+# Industrial Power Transformer Technical Manual & Service Standard
 Document Code: MEC-MAN-TRF-001
 Target Equipment: M-101 (Main Power Transformer 1), M-102 (Auxiliary Power Transformer 2)
 
 ## 1. Overview & Operational Thresholds
-Meiden Power Transformers provide step-down grid isolation and power distribution across Plant Alpha.
+Industrial Power Transformers provide step-down grid isolation and power distribution across Plant Alpha.
 - **Normal Operating Temperature**: 50°C - 75°C
 - **Warning Threshold**: 85°C
 - **Critical Failure Action Level**: > 90°C (Immediate shutdown triggered)
@@ -23,7 +23,7 @@ Meiden Power Transformers provide step-down grid isolation and power distributio
 2. Inspect relay panel K-04 for tripped thermal breakers or fused contacts.
 3. Test cooling fan motor current draw with clamp meter. Replaced cooling fan relay if coil resistance deviates >10% from 240 ohms.
 4. Draw 500mL oil sample from lower drain valve and conduct dissolved gas analysis (DGA) and dielectric breakdown testing.
-5. If oil breakdown voltage is < 30kV, drain, vacuum filter, and refill with Meiden Oil Spec ISO-32.
+5. If oil breakdown voltage is < 30kV, drain, vacuum filter, and refill with Industrial Oil Spec ISO-32.
 
 ### Issue: Winding Overheating & Tap Changer Gasket Leaks
 **Corrective Procedure**:

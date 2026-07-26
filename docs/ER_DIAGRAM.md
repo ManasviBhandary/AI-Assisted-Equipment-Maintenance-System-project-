@@ -1,6 +1,6 @@
 # Smart Factory Equipment Maintenance Data Warehouse Architecture
 **Entity-Relationship (ER) Diagram & Dimensional Data Modeling Documentation**
-*Meiden Engineering Corporation & Meidensha Corporation DX Promotion Reference*
+*Smart Factory DX Promotion & Infrastructure Reference*
 
 ## 1. Overview & Data Modeling Strategy
 The data platform utilizes a **Dimensional Star Schema** design optimized for Business Intelligence (BI) analytical queries, downtime trends reporting, and AI/RAG query retrieval.

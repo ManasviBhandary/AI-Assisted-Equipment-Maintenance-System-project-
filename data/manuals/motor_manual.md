@@ -1,4 +1,4 @@
-# Meiden High-Torque Industrial Induction Motor Manual
+# High-Torque Industrial Induction Motor Manual
 Document Code: MEC-MAN-MOT-002
 Target Equipment: M-201 (High-Torque Drive Motor 1), M-202 (Conveyor Drive Motor 2)
 
