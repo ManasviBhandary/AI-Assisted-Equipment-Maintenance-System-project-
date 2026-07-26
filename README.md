@@ -110,6 +110,3 @@ docker-compose up --build
 The application will be accessible on port `8000`.
 
 ---
-
-## 📄 License & Contact
-Created for Meiden Engineering & Meidensha Corporation interview reference.
