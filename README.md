@@ -1,13 +1,13 @@
 # Smart Factory Equipment Maintenance & Data Platform 🏭⚡
 
 > **End-to-End AI-Assisted Operations & Data Engineering Infrastructure**  
-> *Prepared for Meiden Engineering Corporation & Meidensha Corporation DX Promotion & Data Infrastructure Applications.*
+> *A comprehensive mini pipeline and operations dashboard for smart factory predictive maintenance and technical querying.*
 
 ---
 
 ## 📌 Project Overview & Concept
 
-This project mirrors the internal **Factory DX (Digital Transformation)** and **AI-assisted operations initiatives** built at Meiden Engineering and Meidensha Corporation. It implements a complete 4-module data pipeline:
+This project implements an end-to-end **Factory DX (Digital Transformation)** and **AI-assisted operations pipeline**. It combines four core modules into a single cohesive platform:
 1. **Raw Sensor & Maintenance Data Ingestion (ETL)**
 2. **Relational Data Warehouse & Star Schema Modeling (SQLite)**
 3. **Executive BI Dashboard & Predictive Maintenance Analytics**
@@ -15,13 +15,13 @@ This project mirrors the internal **Factory DX (Digital Transformation)** and **
 
 ---
 
-## 🎯 Target Roles Covered
+## 🎯 Target Roles & Focus Areas Covered
 
-| Company | Target Role | Key Modules Demonstrated |
+| Track | Target Role Focus | Key Modules Demonstrated |
 | :--- | :--- | :--- |
-| **Meiden Engineering Corporation** | IT Engineer (DX Promotion Office) | Module 4 (RAG Chatbot, AI & Manuals Integration) |
-| **Meidensha Corporation** | Data Engineer (Factory Digitalization / Data Infrastructure) | Module 1 & 2 (ETL Pipeline, Star Schema, SQLite) |
-| **Meidensha Corporation** | Data Engineer (BI & Data Utilization Promotion) | Module 2 & 3 (Star Schema, ER Diagram, BI Visualizations) |
+| **AI & Systems Engineering** | IT & DX Promotion Engineer | Module 4 (RAG Chatbot, AI & Manuals Integration, Security) |
+| **Data Engineering** | Data Engineer (Factory Digitalization & Infrastructure) | Module 1 & 2 (ETL Pipeline, Star Schema, SQLite) |
+| **BI & Data Analytics** | Data Analyst / Data Utilization Engineer | Module 2 & 3 (Star Schema, ER Diagram, BI Visualizations) |
 
 ---
 
@@ -64,7 +64,7 @@ flowchart TD
 
 ### Module 4 — AI / RAG Maintenance Assistant & Access Control Security
 - Conversational RAG engine (`backend/rag_engine.py`) integrating technical equipment manuals (`data/manuals/`) with historical SQL maintenance logs.
-- **Information Security Access Control**: Implements API key authentication middleware (`X-API-Key: meiden-dx-secret-key`) for secure cloud & REST endpoint access.
+- **Information Security Access Control**: Implements API key authentication middleware (`X-API-Key: factory-dx-secret-key`) for secure cloud & REST endpoint access.
 - Allows natural-language queries:
   - *"When was Machine 102 last serviced?"*
   - *"What is the procedure for high bearing vibration in motor M-201?"*
@@ -79,8 +79,8 @@ flowchart TD
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/YourUsername/Smart-Factory-Maintenance-Platform.git
-cd Smart-Factory-Maintenance-Platform
+git clone https://github.com/ManasviBhandary/AI-Assisted-Equipment-Maintenance-System-project-.git
+cd AI-Assisted-Equipment-Maintenance-System-project-
 ```
 
 ### 2. Run ETL Pipeline
@@ -110,3 +110,6 @@ docker-compose up --build
 The application will be accessible on port `8000`.
 
 ---
+
+## 📄 License & Overview
+Open source project for smart factory data engineering and AI operations demonstration.
