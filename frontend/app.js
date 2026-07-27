@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'dashboard': 'Smart Factory Equipment Analytics & BI Dashboard',
         'ai-assistant': 'AI / RAG Operations Assistant',
         'equipment': 'Equipment Status & Predictive Maintenance Windows',
+        'predictive-alerts': 'Module 5 — Predictive Failure Alert System & Risk Engine',
         'data-warehouse': 'Relational Data Warehouse & Star Schema Browser',
         'er-diagram': 'Star Schema Entity-Relationship (ER) Model'
     };
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDowntimeTrend();
     loadDefectRates();
     loadEquipmentStatus();
+    loadPredictiveAlerts();
     loadStarSchema();
 
     // ETL Trigger
@@ -245,6 +247,120 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
+    // 5.5 Module 5: Predictive Failure Alert System Engine
+    async function loadPredictiveAlerts() {
+        try {
+            const res = await fetch('/api/predictive-alerts');
+            const data = await res.json();
+
+            const summary = data.summary;
+            const alerts = data.alerts;
+
+            // Update Summary KPI Banner
+            if (document.getElementById('pred-total-assets')) {
+                document.getElementById('pred-total-assets').textContent = summary.total_monitored;
+            }
+            if (document.getElementById('pred-high-risk')) {
+                document.getElementById('pred-high-risk').textContent = summary.high_risk_alerts;
+            }
+            if (document.getElementById('pred-avg-risk')) {
+                document.getElementById('pred-avg-risk').textContent = `${summary.avg_system_risk_pct}%`;
+            }
+
+            const container = document.getElementById('predictive-alerts-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            alerts.forEach(item => {
+                const card = document.createElement('div');
+                const riskLevelLower = item.risk_level.toLowerCase();
+                card.className = `pred-alert-card risk-${riskLevelLower}`;
+
+                const fillWidth = Math.min(100, Math.max(8, item.risk_score_pct));
+
+                card.innerHTML = `
+                    <div class="pred-card-header">
+                        <div>
+                            <span class="pred-eq-id">${item.equipment_id}</span>
+                            <h4 class="pred-eq-name">${item.name}</h4>
+                            <span class="pred-eq-type">${item.type} • ${item.location}</span>
+                        </div>
+                        <div class="risk-badge-box ${riskLevelLower}">
+                            <span class="risk-badge-label">${item.risk_level} RISK</span>
+                            <span class="risk-score-value">${item.risk_score_pct}%</span>
+                        </div>
+                    </div>
+
+                    <div class="risk-progress-bar-container">
+                        <div class="risk-progress-bar-fill ${riskLevelLower}" style="width: ${fillWidth}%;"></div>
+                    </div>
+
+                    <div class="pred-metrics-grid">
+                        <div class="pred-metric-item">
+                            <span>Predicted Failure Window</span>
+                            <strong>In ${item.predicted_hours_to_failure} hrs</strong>
+                        </div>
+                        <div class="pred-metric-item">
+                            <span>Vibration</span>
+                            <strong>${item.vibration_mm_s} mm/s</strong>
+                        </div>
+                        <div class="pred-metric-item">
+                            <span>Temperature</span>
+                            <strong>${item.temperature_c} °C</strong>
+                        </div>
+                        <div class="pred-metric-item">
+                            <span>Runtime</span>
+                            <strong>${item.runtime_hours} hrs</strong>
+                        </div>
+                    </div>
+
+                    <div class="pred-driver-box">
+                        <strong><i data-lucide="alert-circle"></i> Root Cause Risk Driver:</strong>
+                        <p>${item.primary_driver}</p>
+                    </div>
+
+                    <div class="pred-action-box">
+                        <strong><i data-lucide="wrench"></i> Recommended Preventive Action:</strong>
+                        <p>${item.recommended_action}</p>
+                    </div>
+
+                    <button class="btn-dispatch-maint" onclick="dispatchPreventiveMaintenance('${item.equipment_id}', '${item.recommended_action.replace(/'/g, "\\'")}')">
+                        <i data-lucide="calendar"></i> Dispatch Preventive Maintenance Order
+                    </button>
+                `;
+
+                container.appendChild(card);
+            });
+
+            if (window.lucide) lucide.createIcons();
+
+        } catch (err) {
+            console.error('Failed to load predictive alerts:', err);
+        }
+    }
+
+    window.dispatchPreventiveMaintenance = async function(equipmentId, recommendedAction) {
+        try {
+            const res = await fetch('/api/trigger-maintenance', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    equipment_id: equipmentId,
+                    recommended_action: recommendedAction
+                })
+            });
+            const data = await res.json();
+            showToast(data.message || `Preventive Maintenance order dispatched for ${equipmentId}!`);
+            loadMetrics();
+            loadEquipmentStatus();
+            loadPredictiveAlerts();
+            loadStarSchema();
+        } catch (err) {
+            showToast(`Failed to dispatch maintenance for ${equipmentId}!`);
+            console.error(err);
+        }
+    };
+
     // 6. Run ETL Trigger
     async function runEtlPipeline() {
         const spinner = document.getElementById('etl-spinner');
@@ -260,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadDowntimeTrend();
             loadDefectRates();
             loadEquipmentStatus();
+            loadPredictiveAlerts();
             loadStarSchema();
         } catch (err) {
             showToast('ETL Execution failed!');

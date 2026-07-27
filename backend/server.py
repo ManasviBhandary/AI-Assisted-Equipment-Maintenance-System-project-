@@ -76,6 +76,8 @@ class SmartFactoryRequestHandler(SimpleHTTPRequestHandler):
             self.get_equipment_status()
         elif path == '/api/star-schema':
             self.get_star_schema()
+        elif path == '/api/predictive-alerts':
+            self.get_predictive_alerts()
         elif path == '/api/export-report':
             self.get_export_report()
         else:
@@ -111,8 +113,11 @@ class SmartFactoryRequestHandler(SimpleHTTPRequestHandler):
                 self._send_json({"status": "success", "message": "ETL Pipeline executed successfully! Database reloaded."})
             except Exception as e:
                 self._send_json({"status": "error", "message": str(e)}, status=500)
+        elif path == '/api/trigger-maintenance':
+            self.trigger_preventive_maintenance(body)
         else:
             self._send_json({"error": "Endpoint not found"}, status=404)
+
 
     def get_metrics(self):
         if not os.path.exists(DB_PATH):
@@ -274,7 +279,136 @@ class SmartFactoryRequestHandler(SimpleHTTPRequestHandler):
         }
         self._send_json(report)
 
+    def get_predictive_alerts(self):
+        """Module 5: Predictive Failure Alert System Engine."""
+        if not os.path.exists(DB_PATH):
+            self._send_json({"error": "Database not initialized"}, status=500)
+            return
+
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # Query telemetry aggregates & equipment info
+        cursor.execute('''
+            SELECT e.equipment_id, e.name, e.type, e.location_plant, e.location_sector,
+                   t.temperature_c, t.vibration_mm_s, t.pressure_bar, t.runtime_hours,
+                   (SELECT COUNT(*) FROM fact_sensor_telemetry st WHERE st.equipment_id = e.equipment_id AND st.defect_flag = 1) as defect_count,
+                   (SELECT AVG(st.temperature_c) FROM fact_sensor_telemetry st WHERE st.equipment_id = e.equipment_id) as avg_temp,
+                   (SELECT AVG(st.vibration_mm_s) FROM fact_sensor_telemetry st WHERE st.equipment_id = e.equipment_id) as avg_vib
+            FROM dim_equipment e
+            LEFT JOIN (
+                SELECT equipment_id, temperature_c, vibration_mm_s, pressure_bar, runtime_hours,
+                       ROW_NUMBER() OVER (PARTITION BY equipment_id ORDER BY timestamp DESC) as rn
+                FROM fact_sensor_telemetry
+            ) t ON e.equipment_id = t.equipment_id AND t.rn = 1
+        ''')
+
+        alerts = []
+        high_risk_count = 0
+
+        for r in cursor.fetchall():
+            eq = dict(r)
+            temp = eq.get('temperature_c') or 60.0
+            vib = eq.get('vibration_mm_s') or 1.5
+            runtime = eq.get('runtime_hours') or 1000
+            defects = eq.get('defect_count') or 0
+
+            # Risk Model Calculation
+            temp_risk = max(0.0, (temp - 55.0) * 1.6)
+            vib_risk = max(0.0, (vib - 1.2) * 28.0)
+            runtime_risk = min(25.0, (runtime / 6000.0) * 25.0)
+            defect_risk = min(20.0, defects * 10.0)
+
+            total_risk = min(98, max(5, int(temp_risk + vib_risk + runtime_risk + defect_risk)))
+
+            if total_risk >= 70:
+                risk_level = 'HIGH'
+                high_risk_count += 1
+                hours_to_failure = round(max(2.0, (100 - total_risk) * 0.4), 1)
+                primary_driver = f"High Vibration Anomaly ({vib:.2f} mm/s) & Thermal Spike ({temp:.1f}°C)"
+                recommended_action = "Schedule immediate bearing alignment and thermal paste re-application."
+            elif total_risk >= 40:
+                risk_level = 'MEDIUM'
+                hours_to_failure = round(max(12.0, (100 - total_risk) * 1.5), 1)
+                primary_driver = f"Accumulated Runtime ({runtime} hrs) & Slight Temperature Elevation"
+                recommended_action = "Plan preventive inspection within 7 days during regular shift downtime."
+            else:
+                risk_level = 'LOW'
+                hours_to_failure = round(max(120.0, (100 - total_risk) * 4.0), 1)
+                primary_driver = "Nominal Sensor Telemetry Baseline"
+                recommended_action = "Continue standard automated health monitoring."
+
+            alerts.append({
+                "equipment_id": eq['equipment_id'],
+                "name": eq['name'],
+                "type": eq['type'],
+                "location": f"{eq['location_plant']} ({eq['location_sector']})",
+                "temperature_c": temp,
+                "vibration_mm_s": vib,
+                "runtime_hours": runtime,
+                "risk_score_pct": total_risk,
+                "risk_level": risk_level,
+                "predicted_hours_to_failure": hours_to_failure,
+                "primary_driver": primary_driver,
+                "recommended_action": recommended_action
+            })
+
+        conn.close()
+
+        # Sort highest risk first
+        alerts.sort(key=lambda x: x['risk_score_pct'], reverse=True)
+
+        self._send_json({
+            "summary": {
+                "total_monitored": len(alerts),
+                "high_risk_alerts": high_risk_count,
+                "avg_system_risk_pct": round(sum(a['risk_score_pct'] for a in alerts) / max(1, len(alerts)), 1),
+                "engine_status": "Active (Rule-Based & Telemetry Threshold Model)"
+            },
+            "alerts": alerts
+        })
+
+    def trigger_preventive_maintenance(self, body):
+        """Proactively schedule preventive maintenance order to prevent breakdown."""
+        equipment_id = body.get('equipment_id', 'M-101')
+        recommended_action = body.get('recommended_action', 'Preventive Maintenance Inspection')
+        
+        if not os.path.exists(DB_PATH):
+            self._send_json({"error": "Database not initialized"}, status=500)
+            return
+
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        event_id = f"EVT-PREV-{int(datetime.now().timestamp())}"
+        date_str = datetime.now().strftime('%Y-%m-%d')
+        date_id = f"DATE-{date_str.replace('-', '')}"
+
+        # Ensure date_id exists in dim_date
+        dt = datetime.now()
+        quarter = (dt.month - 1) // 3 + 1
+        cursor.execute('INSERT OR IGNORE INTO dim_date VALUES (?,?,?,?,?,?)',
+                       (date_id, date_str, dt.year, dt.month, dt.day, quarter))
+
+        # Insert preventive maintenance record
+        cursor.execute('''
+            INSERT INTO fact_maintenance_events
+            (event_id, date_id, equipment_id, technician_id, location_id, downtime_hours, defect_flag, maintenance_cost_usd, maintenance_type, description)
+            VALUES (?, ?, ?, 'TECH-01', 'LOC-PlantAlpha-SectorA', 0.5, 0, 150.00, 'Preventive Alert Action', ?)
+        ''', (event_id, date_id, equipment_id, f"[PREVENTIVE ALERT DISPATCHED]: {recommended_action}"))
+
+        conn.commit()
+        conn.close()
+
+        self._send_json({
+            "status": "success",
+            "message": f"Preventive Maintenance Work Order #{event_id} dispatched for {equipment_id}!",
+            "work_order_id": event_id
+        })
+
 def run_server(port=8000):
+
     server_address = ('', port)
     httpd = HTTPServer(server_address, SmartFactoryRequestHandler)
     print(f"============================================================")

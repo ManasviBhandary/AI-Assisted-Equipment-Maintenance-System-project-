@@ -43,6 +43,11 @@
                     <i data-lucide="cpu"></i>
                     <span>Equipment Status</span>
                 </button>
+                <button class="nav-btn" data-tab="predictive-alerts">
+                    <i data-lucide="shield-alert"></i>
+                    <span>Predictive Alerts</span>
+                    <span class="badge red">Mod 5</span>
+                </button>
                 <button class="nav-btn" data-tab="data-warehouse">
                     <i data-lucide="database"></i>
                     <span>Star Schema DB</span>
@@ -209,6 +214,45 @@
                                 <tr><td colspan="9" class="loading-td">Loading equipment data...</td></tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: MODULE 5 PREDICTIVE FAILURE ALERT SYSTEM -->
+            <section id="tab-predictive-alerts" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div>
+                            <h3><i data-lucide="shield-alert"></i> Module 5 — Predictive Failure Alert System</h3>
+                            <p>Shift from reactive downtime tracking to proactive preventive maintenance risk modeling</p>
+                        </div>
+                        <div class="engine-pill">
+                            <i data-lucide="activity"></i> Risk Engine: <strong>Active Telemetry Thresholds</strong>
+                        </div>
+                    </div>
+
+                    <!-- Summary KPI Banner -->
+                    <div class="predictive-summary-grid">
+                        <div class="pred-kpi-card">
+                            <span class="pred-label">Monitored Assets</span>
+                            <h4 id="pred-total-assets">--</h4>
+                            <span class="pred-sub">Active industrial equipment</span>
+                        </div>
+                        <div class="pred-kpi-card high-risk">
+                            <span class="pred-label">High Failure Risk Alerts</span>
+                            <h4 id="pred-high-risk">--</h4>
+                            <span class="pred-sub">Require immediate action</span>
+                        </div>
+                        <div class="pred-kpi-card">
+                            <span class="pred-label">Avg System Risk Index</span>
+                            <h4 id="pred-avg-risk">--%</h4>
+                            <span class="pred-sub">Fleet-wide failure risk</span>
+                        </div>
+                    </div>
+
+                    <!-- Risk Cards Grid -->
+                    <div class="predictive-alerts-grid" id="predictive-alerts-container">
+                        <div class="loading-td">Loading Predictive Failure Risk Engine...</div>
                     </div>
                 </div>
             </section>
