@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'dashboard': 'Smart Factory Equipment Analytics & BI Dashboard',
         'ai-assistant': 'AI / RAG Operations Assistant',
         'equipment': 'Equipment Status & Predictive Maintenance Windows',
-        'predictive-alerts': 'Module 5 — Predictive Failure Alert System & Risk Engine',
+        'predictive-alerts': 'Predictive Failure Alert System & Risk Engine',
         'data-warehouse': 'Relational Data Warehouse & Star Schema Browser',
         'er-diagram': 'Star Schema Entity-Relationship (ER) Model'
     };
