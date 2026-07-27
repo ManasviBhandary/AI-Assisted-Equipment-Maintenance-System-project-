@@ -79,9 +79,8 @@ flowchart TD
 - Simple to build yet demo-friendly: a dashboard where each machine shows a red / yellow / green health status based on predicted risk.
 - Can start as a rule-based threshold model (e.g., flag high risk if runtime hours + temperature deviation exceed a set limit), then optionally upgraded to a basic ML model such as logistic regression or a decision tree trained on labeled failure data.
 
-> **One-line pitch**: *"The system doesn't just track maintenance history — it predicts equipment failure risk in advance and proactively alerts technicians, turning reactive maintenance into preventive maintenance."*
-
 ---
+
 
 ## Why This Works
 
