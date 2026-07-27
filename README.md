@@ -1,31 +1,27 @@
-# Smart Factory Equipment Maintenance & Data Platform
+# AI-Assisted Equipment Maintenance System
 
-> **End-to-End AI-Assisted Operations & Data Engineering Infrastructure**  
-> *A comprehensive mini pipeline and operations dashboard for smart factory predictive maintenance and technical querying.*
-
----
-
-## Project Overview & Concept
-
-This project implements an end-to-end **Factory DX (Digital Transformation)** and **AI-assisted operations pipeline**. It combines four core modules into a single cohesive platform:
-1. **Raw Sensor & Maintenance Data Ingestion (ETL)**
-2. **Relational Data Warehouse & Star Schema Modeling (SQLite)**
-3. **Executive BI Dashboard & Predictive Maintenance Analytics**
-4. **AI / RAG Maintenance Assistant** (Answering natural language queries across equipment manuals and database history)
+> **A combined project idea for Meiden Engineering Corporation & Meidensha Corporation applications**  
+> *End-to-End AI-Assisted Operations & Data Engineering Infrastructure*
 
 ---
 
-## Target Roles & Focus Areas Covered
+## Concept
 
-| Track | Target Role Focus | Key Modules Demonstrated |
-| :--- | :--- | :--- |
-| **AI & Systems Engineering** | IT & DX Promotion Engineer | Module 4 (RAG Chatbot, AI & Manuals Integration, Security) |
-| **Data Engineering** | Data Engineer (Factory Digitalization & Infrastructure) | Module 1 & 2 (ETL Pipeline, Star Schema, SQLite) |
-| **BI & Data Analytics** | Data Analyst / Data Utilization Engineer | Module 2 & 3 (Star Schema, ER Diagram, BI Visualizations) |
+A mini end-to-end pipeline that ingests equipment sensor and maintenance data, stores it in a proper database, visualizes it via a BI dashboard, and adds an AI/RAG chatbot on top for querying maintenance manuals and equipment history. This mirrors exactly what both companies are building internally as part of their factory DX and AI-assisted operations initiatives.
 
 ---
 
-## Architecture & 4 Core Modules
+## Target Roles Covered
+
+| Company | Role |
+| :--- | :--- |
+| **Meiden Engineering Corporation** | IT Engineer (DX Promotion Office) |
+| **Meidensha Corporation** | Data Engineer (Factory Digitalization / Data Infrastructure) |
+| **Meidensha Corporation** | Data Engineer (BI & Data Utilization Promotion) |
+
+---
+
+## Architecture — 5 Core Modules
 
 ```mermaid
 flowchart TD
@@ -34,16 +30,21 @@ flowchart TD
     B --> E[(Module 2: SQLite Data Warehouse Star Schema)]
     E --> F[Module 3: Interactive BI Analytics Dashboard]
     E --> G[Module 4: RAG AI Operations Assistant]
+    E --> I[Module 5: Predictive Failure Alert System]
     D --> G
     F --> H[Unified Web Application Platform UI]
     G --> H
+    I --> H
 ```
 
 ### Module 1 — Data Ingestion & ETL
-- **Python ETL Pipeline** (`etl/etl_pipeline.py`) extracts raw telemetry logs (`sensor_logs.csv`) and maintenance event records (`maintenance_logs.csv`).
+*Maps to: Data Engineer, Factory Digitalization (Meidensha)*
+- **Python ETL Pipeline** (`etl/etl_pipeline.py`) pulls mock equipment sensor logs (`sensor_logs.csv`) and maintenance event records (`maintenance_logs.csv`).
 - Data cleaning, datetime normalization, missing value handling, and transformation into dimensional star schema format.
+- Demonstrates ETL and database-building skills exactly as required in the job description.
 
-### Module 2 — Data Warehouse & Star Schema Modeling
+### Module 2 — Data Warehouse & Modeling
+*Maps to: Data Engineer, BI & Data Utilization Promotion (Meidensha)*
 - **Relational Storage**: Embedded high-performance SQLite database (`factory_maintenance.db`).
 - **Star Schema Structure**:
   - `fact_maintenance_events` (Fact Table: downtime hours, repair cost, defect flag, technician, description)
@@ -52,23 +53,42 @@ flowchart TD
   - `dim_location` (Plant Alpha/Beta, Sectors A-D)
   - `dim_technician` (Senior Electrical, Mechanical, Vibration Analysts)
   - `dim_date` (Date breakdown: Year, Quarter, Month, Day)
-- Full ER Diagram available in [`docs/ER_DIAGRAM.md`](docs/ER_DIAGRAM.md).
+- Full ER Diagram available in [`docs/ER_DIAGRAM.md`](docs/ER_DIAGRAM.md) — a directly requested skill in the posting.
 
-### Module 3 — Interactive BI Analytics Dashboard
-- Web-based BI analytics dashboard (`http://localhost:8000`) built with modern styling (dark mode, glassmorphism, responsive grid, dynamic Chart.js animations).
+### Module 3 — BI Dashboard
+*Maps to: Both Data Engineer roles (Meidensha)*
+- Connects database telemetry to interactive web dashboard (`http://localhost:8000`) built with modern styling (dark mode, glassmorphism, responsive grid, dynamic Chart.js animations).
 - Metrics tracked:
   - **Downtime Trends by Machine**
   - **MTTR (Mean Time To Repair)**
   - **Defect Sample & Temperature Distribution**
   - **Predictive Maintenance Service Windows** (Immediate / Schedule / Nominal)
+- Demonstrates BI creation and data utilization for non-technical stakeholders such as factory managers.
 
-### Module 4 — AI / RAG Maintenance Assistant & Access Control Security
-- Conversational RAG engine (`backend/rag_engine.py`) integrating technical equipment manuals (`data/manuals/`) with historical SQL maintenance logs.
-- **Information Security Access Control**: Implements API key authentication middleware (`X-API-Key: factory-dx-secret-key`) for secure cloud & REST endpoint access.
-- Allows natural-language queries:
-  - *"When was Machine 102 last serviced?"*
-  - *"What is the procedure for high bearing vibration in motor M-201?"*
-  - *"How to replace transformer oil fan relay?"*
+### Module 4 — AI / RAG Assistant & Security
+*Maps to: IT Engineer, DX Promotion Office (Meiden Engineering)*
+- Build a RAG chatbot (`backend/rag_engine.py`) answering natural-language questions such as *"When was Machine 102 last serviced?"* or *"What is the procedure for high bearing vibration in motor M-201?"*
+- Feeds mock equipment manuals (`data/manuals/`) plus the maintenance database as knowledge sources.
+- Deployable on AWS or OCI free tier, with basic access control (`X-API-Key: factory-dx-secret-key`) — covers AI/RAG, cloud, and information security requirements.
+
+### Module 5 — Predictive Failure Alert System (Standout Feature)
+*Maps to: All three roles — the feature that bridges data engineering, BI, and AI/RAG*
+- Instead of only reporting what already happened (downtime logs, defect history), this feature predicts when a machine is likely to fail before it happens, using runtime hours, temperature trends, and past failure patterns.
+- Triggers an automatic alert recommending maintenance before a breakdown occurs — shifting the system from reactive to preventive maintenance.
+- Directly reflects Meiden Engineering's core mission of *"extending the service life of facilities"*.
+- Bridges the data/BI side (Meidensha) and the AI side (Meiden Engineering) in a single feature.
+- Simple to build yet demo-friendly: a dashboard where each machine shows a red / yellow / green health status based on predicted risk.
+- Can start as a rule-based threshold model (e.g., flag high risk if runtime hours + temperature deviation exceed a set limit), then optionally upgraded to a basic ML model such as logistic regression or a decision tree trained on labeled failure data.
+
+> **One-line pitch**: *"The system doesn't just track maintenance history — it predicts equipment failure risk in advance and proactively alerts technicians, turning reactive maintenance into preventive maintenance."*
+
+---
+
+## Why This Works
+
+- **Single Cohesive Narrative**: A small-scale version of what the DX Promotion team and the factory data team are actually trying to build — from raw equipment data to an AI assistant that helps technicians and managers use that data.
+- **Versatile Interview Demo**: It can be demoed once but discussed differently depending on the interview — lead with Module 4 for the Meiden Engineering IT role, and lead with Modules 1–3 for the Meidensha Data Engineer roles.
+- **Complete Skill Coverage**: It naturally covers nearly every required and preferred skill across all three job descriptions: Python, SQL, AWS, BI tools, ER diagrams, ETL, RAG / generative AI, and basic cloud security.
 
 ---
 
@@ -112,4 +132,5 @@ The application will be accessible on port `8000`.
 ---
 
 ## License & Overview
-Open source project for smart factory data engineering and AI operations demonstration.
+Open source project for smart factory data engineering and AI operations demonstration. Prepared as an interview-preparation reference for Meiden Engineering Corporation and Meidensha Corporation applications.
+
