@@ -1,11 +1,11 @@
-# Smart Factory Equipment Maintenance & Data Platform 🏭⚡
+# Smart Factory Equipment Maintenance & Data Platform
 
 > **End-to-End AI-Assisted Operations & Data Engineering Infrastructure**  
 > *A comprehensive mini pipeline and operations dashboard for smart factory predictive maintenance and technical querying.*
 
 ---
 
-## 📌 Project Overview & Concept
+## Project Overview & Concept
 
 This project implements an end-to-end **Factory DX (Digital Transformation)** and **AI-assisted operations pipeline**. It combines four core modules into a single cohesive platform:
 1. **Raw Sensor & Maintenance Data Ingestion (ETL)**
@@ -15,7 +15,7 @@ This project implements an end-to-end **Factory DX (Digital Transformation)** an
 
 ---
 
-## 🎯 Target Roles & Focus Areas Covered
+## Target Roles & Focus Areas Covered
 
 | Track | Target Role Focus | Key Modules Demonstrated |
 | :--- | :--- | :--- |
@@ -25,7 +25,7 @@ This project implements an end-to-end **Factory DX (Digital Transformation)** an
 
 ---
 
-## 🏗️ Architecture & 4 Core Modules
+## Architecture & 4 Core Modules
 
 ```mermaid
 flowchart TD
@@ -72,7 +72,7 @@ flowchart TD
 
 ---
 
-## 💻 Quick Start & Running Locally
+## Quick Start & Running Locally
 
 ### Prerequisites
 - Python 3.9 or higher installed.
@@ -100,7 +100,7 @@ Visit **`http://localhost:8000`** in your browser.
 
 ---
 
-## 🐳 Docker Deployment (AWS / OCI Free Tier)
+## Docker Deployment (AWS / OCI Free Tier)
 
 To deploy with Docker:
 
@@ -111,5 +111,5 @@ The application will be accessible on port `8000`.
 
 ---
 
-## 📄 License & Overview
+## License & Overview
 Open source project for smart factory data engineering and AI operations demonstration.
